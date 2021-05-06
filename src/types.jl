@@ -106,3 +106,18 @@ end
 @as_record Ctrl
 @as_record Operation
 @as_record AdjointOperation
+
+Base.length(c::Chain) = length(c.args)
+
+function leaves(root::Chain)
+    nodes = []
+    sizehint!(nodes, length(root))
+    for each in root.args
+        if each isa Chain
+            append!(nodes, leaves(each::Chain))
+        else
+            push!(nodes, each)
+        end
+    end
+    return nodes
+end

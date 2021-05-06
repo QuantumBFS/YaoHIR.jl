@@ -25,4 +25,9 @@ circ = Chain(
     Ctrl(Gate(Core.SSAValue(1), Locations(3)), CtrlLocations(2))
 )
 
-print(circ_1)
+print(circ)
+
+@test YaoHIR.leaves(circ) == [Gate(YaoHIR.X, Locations(1)),
+    Core.SSAValue(1),
+    Ctrl(Gate(Core.SSAValue(1), Locations(3)), CtrlLocations(2))
+]
