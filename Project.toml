@@ -1,7 +1,7 @@
 name = "YaoHIR"
 uuid = "6769671a-fce8-4286-b3f7-6099e1b1298a"
 authors = ["Roger-Luo <rogerluo.rl18@gmail.com> and contributors"]
-version = "0.1.1"
+version = "0.1.2"
 
 [deps]
 Expronicon = "6b7a57c9-7cc1-4fdf-b7f5-e857abae3636"
