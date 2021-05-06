@@ -3,11 +3,26 @@ using MLStyle
 using YaoHIR
 using Test
 
-@testset "YaoHIR.jl" begin
-    # Write your tests here.
-end
-using YaoHIR: intrinsic_m
-intrinsic_m(:X)
-intrinsic_m(:(Rx(theta::T) where {T <: Real}))
+module TestIntrinsic
+using YaoHIR: @intrinsic
 
-Chain([Gate(YaoHIR.X, Locations(1)), ])
+@intrinsic X
+@intrinsic R(theta::T) where {T <: Real}
+
+end
+
+@test YaoHIR.routine_name(TestIntrinsic.X) == :X
+@test YaoHIR.routine_name(TestIntrinsic.R(1.0)) == :R
+@test TestIntrinsic.R(1.0).theta == 1.0
+
+display(YaoHIR.X)
+display(YaoHIR.Rx(1.0))
+display(YaoHIR.Operation(YaoHIR.X, 2.0))
+
+circ = Chain(
+    Gate(YaoHIR.X, Locations(1)),
+    Core.SSAValue(1),
+    Ctrl(Gate(Core.SSAValue(1), Locations(3)), CtrlLocations(2))
+)
+
+print(circ_1)

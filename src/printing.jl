@@ -43,3 +43,23 @@ function Base.show(io::IO, ::Type{T}) where {name,T<:GenericRoutine{name}}
     mod === Main || print(io, mod, ".")
     print(io, name, ")")
 end
+
+function Base.show(io::IO, op::Operation)
+    print(io, routine_name(op.parent))
+    print(io, "(")
+    join(io, op.args, ", ")
+    print(io, ")")
+end
+
+function Base.show(io::IO, ::MIME"text/plain", g::Gate)
+    print(io, g.locations, " => ", g.operation)
+end
+
+Base.show(io::IO, g::Chain) = show(io, MIME"text/plain"(), g)
+
+function Base.show(io::IO, ::MIME"text/plain", g::Chain)
+    print(io, "Chain(")
+    join(io, g.args, ", ")
+    print(io, ")")
+end
+
