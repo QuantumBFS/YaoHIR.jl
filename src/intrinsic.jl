@@ -56,8 +56,8 @@ end
 @intrinsic H
 @intrinsic S
 @intrinsic T
-@intrinsic shift(θ::T) where {T <: Real}
-@intrinsic Rx(θ::T) where {T <: Real}
-@intrinsic Ry(θ::T) where {T <: Real}
-@intrinsic Rz(θ::T) where {T <: Real}
-@intrinsic UGate(α::T, β::T, γ::T) where {T <: Real}
+@intrinsic shift(θ::T) where {T}
+@intrinsic Rx(θ::T) where {T}
+@intrinsic Ry(θ::T) where {T}
+@intrinsic Rz(θ::T) where {T}
+@intrinsic UGate(α::T, β::T, γ::T) where {T}
