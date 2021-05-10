@@ -86,18 +86,26 @@ struct Chain <: Routine
     Chain(args...) = new(collect(Any, args))
 end
 
+# prop adjoint to leaves
+Base.adjoint(c::Chain) = Chain(map(adjoint, c.args))
+
 struct Gate <: Routine
     operation # SSAValue/Routine
     locations # SSAValue/Locations
 end
+
+Base.adjoint(x::Gate) = Gate(adjoint(x.operation), x.locations)
 
 struct Ctrl <: Routine
     gate::Gate
     ctrl # SSAValue/CtrlLocation
 end
 
+Base.adjoint(x::Ctrl) = Ctrl(adjoint(x.gate), x.ctrl)
+
 struct BlockIR
     parent::CodeInfo
+    nqubits::Int
     circuit::Chain
 end
 
