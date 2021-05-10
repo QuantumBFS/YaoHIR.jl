@@ -10,6 +10,7 @@ export GenericRoutine, Routine,
 using MLStyle
 using Expronicon
 using Core: CodeInfo
+using Core.Compiler: IRCode
 
 include("types.jl")
 include("intrinsic.jl")

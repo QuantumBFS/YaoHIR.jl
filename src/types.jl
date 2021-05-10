@@ -104,7 +104,7 @@ end
 Base.adjoint(x::Ctrl) = Ctrl(adjoint(x.gate), x.ctrl)
 
 struct BlockIR
-    parent::CodeInfo
+    parent::IRCode
     nqubits::Int
     circuit::Chain
 end
