@@ -96,7 +96,7 @@ struct Ctrl <: Routine
     ctrl # SSAValue/CtrlLocation
 end
 
-struct HIR
+struct BlockIR
     parent::CodeInfo
     circuit::Chain
 end

@@ -4,7 +4,8 @@ export GenericRoutine, Routine,
     IntrinsicRoutine,
     Operation,
     AdjointOperation,
-    Chain, Gate, Ctrl
+    Chain, Gate, Ctrl,
+    BlockIR
 
 using MLStyle
 using Expronicon

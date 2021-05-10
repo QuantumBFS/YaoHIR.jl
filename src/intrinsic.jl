@@ -32,6 +32,7 @@ function intrinsic_m(ex, n::Int=1)
     end
 
     quote
+        export $(def.name)
         Core.@__doc__ $(codegen_ast(def))
         $(codegen_helpers(def, n, binding_name))
         $binding
