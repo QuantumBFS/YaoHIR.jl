@@ -8,6 +8,7 @@ using YaoHIR: @intrinsic
 
 @intrinsic X
 @intrinsic R(theta::T) where {T <: Real}
+@intrinsic SWAP
 
 end
 
