@@ -57,6 +57,7 @@ end
 @intrinsic H
 @intrinsic S
 @intrinsic T
+@intrinsic SWAP
 @intrinsic shift(θ::T) where {T}
 @intrinsic Rx(θ::T) where {T}
 @intrinsic Ry(θ::T) where {T}
