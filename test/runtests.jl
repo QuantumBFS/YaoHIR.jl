@@ -32,3 +32,14 @@ print(circ)
     Core.SSAValue(1),
     Ctrl(Gate(Core.SSAValue(1), Locations(3)), CtrlLocations(2))
 ]
+
+using YaoHIR: decompose_zx, tcount, random_circuit
+
+ccz = Ctrl(Gate(YaoHIR.Z, Locations(3)), CtrlLocations((1,2)))
+@test tcount(ccz) == 7
+@test decompose_zx(ccz).args == decompose_zx(Chain(ccz)).args
+
+using Random
+Random.seed!(1)
+bir = random_circuit(5, 100)
+@test tcount(bir) == 8
