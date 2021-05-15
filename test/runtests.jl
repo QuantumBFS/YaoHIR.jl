@@ -42,4 +42,5 @@ ccz = Ctrl(Gate(YaoHIR.Z, Locations(3)), CtrlLocations((1,2)))
 using Random
 Random.seed!(1)
 bir = random_circuit(5, 100)
+decompose_zx(bir)
 @test tcount(bir) == 8

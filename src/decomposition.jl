@@ -1,16 +1,36 @@
-decompose_zx(::T) where T = error("`decompose_zx` is not defined for type $YaoHIR.T")
+"""
+    decompose_zx(c)
+
+Decompose `c` into terms of Z- and X-basis.
+"""
+decompose_zx(::TT) where TT = error("`decompose_zx` is not defined for type $TT")
 decompose_zx(bir::BlockIR) = BlockIR(bir.parent, bir.nqubits, decompose_zx(bir.circuit))
-decompose_zx(c::Chain) = Chain(reduce(vcat, decompose_zx(g).args for g in c.args)...)
-decompose_zx(g::IntrinsicRoutine) = g
-decompose_zx(a::AdjointOperation) = AdjointOperation(decompose_zx(a.parent))
-function decompose_zx(g::YGate)
-    loc = g.locations
-    return Chain(Gate(YaoHIR.S', loc), Gate(YaoHIR.X, loc), Gate(YaoHIR.S, loc))
+function decompose_zx(c::Chain)
+    new_chain = Chain()
+    for g in c.args
+        cg = decompose_zx(g)
+        if cg isa Chain
+            for gg in cg.args
+                push!(new_chain.args, gg)
+            end
+        else
+            push!(new_chain.args, cg)
+        end
+    end
+    return new_chain
 end
-function decompose_zx(g::Ry)
+decompose_zx(a::AdjointOperation) = AdjointOperation(decompose_zx(a.parent))
+function decompose_zx(g::Gate)
+    op = g.operation
     loc = g.locations
-    theta = g.θ
-    return Chain(Gate(YaoHIR.S', loc), Gate(Rx(theta), loc), Gate(YaoHIR.S, loc))
+    @switch op begin
+        @case ::YGate
+            return Chain(Gate(YaoHIR.S', loc), Gate(YaoHIR.X, loc), Gate(YaoHIR.S, loc))
+        @case ::Ry
+            return Chain(Gate(YaoHIR.S', loc), Gate(Rx(theta), loc), Gate(YaoHIR.S, loc))
+        @case _
+            return g
+    end
 end
 function decompose_zx(cg::Ctrl)
     ctrl = cg.ctrl
