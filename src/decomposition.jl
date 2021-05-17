@@ -1,3 +1,5 @@
+using YaoLocations
+
 """
     decompose_zx(c)
 
