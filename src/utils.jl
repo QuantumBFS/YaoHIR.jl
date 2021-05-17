@@ -45,7 +45,7 @@ Returns the number of non-Clifford gates in circuit `c`.
 """
 tcount(bir::BlockIR) = tcount(bir.circuit)
 tcount(c::Chain) = sum(tcount(g) for g in c.args)
-tcount(::T) where {T <: Routine} = error("T-count for type $T is not defined")
+tcount(::Routine) = error("T-count for type $T is not defined")
 tcount(g::AdjointOperation) = tcount(g.parent)
 function tcount(g::Ctrl)
     if length(g.ctrl) == 1 && length(g.gate.locations) == 1
