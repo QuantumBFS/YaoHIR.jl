@@ -75,9 +75,13 @@ function decompose_zx(cg::Ctrl)
                     )
                 @case Gate(Ry(θ), loc)
                     return Chain(
-                        Gate(Ry(θ/2), loc), 
+                        Gate(YaoHIR.S', loc),
+                        Gate(Rx(θ/2), loc), 
+                        Gate(YaoHIR.S, loc),
                         Ctrl(Gate(YaoHIR.X, loc), ctrl), 
-                        Gate(Ry(-θ/2), loc), 
+                        Gate(YaoHIR.S', loc),
+                        Gate(Rx(-θ/2), loc), 
+                        Gate(YaoHIR.S, loc),
                         Ctrl(Gate(YaoHIR.X, loc), ctrl), 
                     )
                 @case Gate(Rz(θ), loc)
