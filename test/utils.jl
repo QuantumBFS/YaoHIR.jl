@@ -23,3 +23,5 @@ ctrl_ry_zx = decompose_zx(ctrl_ry)
 @test tcount(Gate(YaoHIR.Y, Locations(1))) == 0
 @test tcount(Gate(Ry(π/4), Locations(1))) == 1
 @test tcount(Gate(Ry(π/2), Locations(1))) == 0
+
+@test decompose_zx(ccz).args == decompose_zx(decompose_zx(ccz)).args

@@ -16,7 +16,7 @@ end
 tcount(g::Gate) = tcount(g.operation) * length(g.locations)
 tcount(::IntrinsicRoutine) = 0
 tcount(::TGate) = 1
-tcount(g::Rx) = (abs(rem2pi(g.θ*4, RoundNearest)) < 1e-10 ? 0 : 1)
-tcount(g::Ry) = (abs(rem2pi(g.θ*4, RoundNearest)) < 1e-10 ? 0 : 1)
-tcount(g::Rz) = (abs(rem2pi(g.θ*4, RoundNearest)) < 1e-10 ? 0 : 1)
-tcount(g::shift) = (abs(rem2pi(g.θ*4, RoundNearest)) < 1e-10 ? 0 : 1)
+tcount(g::Rx) = (abs(rem2pi(g.θ*4, RoundNearest)) < sqrt(eps(typeof(g.θ))) ? 0 : 1)
+tcount(g::Ry) = (abs(rem2pi(g.θ*4, RoundNearest)) < sqrt(eps(typeof(g.θ))) ? 0 : 1)
+tcount(g::Rz) = (abs(rem2pi(g.θ*4, RoundNearest)) < sqrt(eps(typeof(g.θ))) ? 0 : 1)
+tcount(g::shift) = (abs(rem2pi(g.θ*4, RoundNearest)) < sqrt(eps(typeof(g.θ))) ? 0 : 1)
