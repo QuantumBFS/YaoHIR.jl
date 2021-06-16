@@ -117,6 +117,7 @@ end
 @as_record Chain
 @as_record Gate
 @as_record Ctrl
+@as_record Typed
 @as_record Operation
 @as_record AdjointOperation
 
