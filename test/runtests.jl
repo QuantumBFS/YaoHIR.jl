@@ -32,3 +32,25 @@ print(circ)
     Core.SSAValue(1),
     Ctrl(Gate(Core.SSAValue(1), Locations(3)), CtrlLocations(2))
 ]
+
+
+@testset "test match" begin
+    gate = Gate(YaoHIR.X, Locations(2))
+
+    @match gate begin
+        Gate(op, locs, _, _) => begin
+            @test op == YaoHIR.X
+            @test locs == Locations(2)
+        end
+    end
+
+    ctrl = Ctrl(Gate(YaoHIR.X, Locations(2)), CtrlLocations(3))
+
+    @match ctrl begin
+        Ctrl(Gate(op, locs, _, _), ctrl) => begin
+            @test op == YaoHIR.X
+            @test locs == Locations(2)
+            @test ctrl == CtrlLocations(3)
+        end
+    end
+end

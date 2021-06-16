@@ -92,9 +92,20 @@ Base.adjoint(c::Chain) = Chain(map(adjoint, c.args))
 struct Gate <: Routine
     operation # SSAValue/Routine
     locations # SSAValue/Locations
+    operation_type
+    locations_type
 end
 
-Base.adjoint(x::Gate) = Gate(adjoint(x.operation), x.locations)
+Gate(operation, locations) = Gate(operation, locations, typeof(operation), typeof(locations))
+
+function Base.adjoint(x::Gate)
+    return if x.operation isa Routine
+        operation = adjoint(x.operation)
+        Gate(operation, x.locations)
+    else
+        Gate(adjoint(x.operation), x.locations, adjoint(x.operation_type), x.locations_type)
+    end
+end
 
 struct Ctrl <: Routine
     gate::Gate
