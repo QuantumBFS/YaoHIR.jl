@@ -16,7 +16,4 @@ include("types.jl")
 include("intrinsic.jl")
 include("printing.jl")
 
-include("utils.jl")
-include("decomposition.jl")
-
 end
