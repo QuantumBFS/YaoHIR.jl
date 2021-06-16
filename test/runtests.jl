@@ -26,7 +26,7 @@ circ = Chain(
     Ctrl(Gate(Core.SSAValue(1), Locations(3)), CtrlLocations(2))
 )
 
-print(circ)
+println(circ)
 
 @test YaoHIR.leaves(circ) == [Gate(YaoHIR.X, Locations(1)),
     Core.SSAValue(1),
@@ -38,7 +38,7 @@ print(circ)
     gate = Gate(YaoHIR.X, Locations(2))
 
     @match gate begin
-        Gate(op, locs, _, _) => begin
+        Gate(op, locs) => begin
             @test op == YaoHIR.X
             @test locs == Locations(2)
         end
@@ -47,10 +47,14 @@ print(circ)
     ctrl = Ctrl(Gate(YaoHIR.X, Locations(2)), CtrlLocations(3))
 
     @match ctrl begin
-        Ctrl(Gate(op, locs, _, _), ctrl) => begin
+        Ctrl(Gate(op, locs), ctrl) => begin
             @test op == YaoHIR.X
             @test locs == Locations(2)
             @test ctrl == CtrlLocations(3)
         end
     end
+end
+
+@testset "utils.jl" begin
+    include("utils.jl")
 end
