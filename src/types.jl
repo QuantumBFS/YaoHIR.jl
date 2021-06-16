@@ -135,3 +135,15 @@ function leaves(root::Chain)
     end
     return nodes
 end
+
+function Base.:(==)(lhs::Chain, rhs::Chain)
+    mapreduce(==, &, lhs.args, rhs.args)
+end
+
+function Base.:(==)(lhs::Gate, rhs::Gate)
+    lhs.operation == rhs.operation && lhs.locations == rhs.locations
+end
+
+function Base.:(==)(lhs::Ctrl, rhs::Ctrl)
+    lhs.gate == rhs.gate && lhs.ctrl == rhs.ctrl
+end

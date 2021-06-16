@@ -10,7 +10,10 @@ function intrinsic_m(ex, n::Int=1)
     if ex isa Symbol
         def = JLStruct(;name=Symbol(ex, :Gate), supertype=IntrinsicRoutine)
         binding_name = ex
-        binding = :(Core.@__doc__ const $ex = $(def.name)())
+        binding = quote
+            export $ex
+            Core.@__doc__ const $ex = $(def.name)()
+        end
     else
         name, args, kw, whereparams, rettype = split_function_head(ex)
         kw === nothing || error("cannot have kwargs in intrinsic operation")
@@ -51,6 +54,13 @@ function codegen_helpers(def::JLStruct, n::Int, name::Symbol)
     end
 end
 
+"""
+Intrinsic Quantum Operations
+"""
+module IntrinsicOperation
+
+using ..YaoHIR: @intrinsic
+
 @intrinsic X
 @intrinsic Y
 @intrinsic Z
@@ -63,3 +73,5 @@ end
 @intrinsic Ry(θ::T) where {T}
 @intrinsic Rz(θ::T) where {T}
 @intrinsic UGate(α::T, β::T, γ::T) where {T}
+
+end
