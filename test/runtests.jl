@@ -26,7 +26,7 @@ circ = Chain(
     Ctrl(Gate(Core.SSAValue(1), Locations(3)), CtrlLocations(2))
 )
 
-println(circ)
+print(circ)
 
 @test YaoHIR.leaves(circ) == [Gate(YaoHIR.X, Locations(1)),
     Core.SSAValue(1),
@@ -53,8 +53,4 @@ println(circ)
             @test ctrl == CtrlLocations(3)
         end
     end
-end
-
-@testset "utils.jl" begin
-    include("utils.jl")
 end
