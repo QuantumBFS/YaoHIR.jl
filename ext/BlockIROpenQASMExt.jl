@@ -1,8 +1,7 @@
 module BlockIROpenQASMExt
 
-using YaoHIR
+using YaoHIR, YaoLocations
 using YaoHIR.IntrinsicOperation
-using YaoLocations
 using MLStyle
 using OpenQASM
 using OpenQASM.Types: Instruction, CXGate, CZGate, Measure, Reset, MainProgram, Include, RegDecl, ASTNode
@@ -31,25 +30,26 @@ end
 function instruction_to_gate(i::Instruction)
   @switch i.name begin
     @case "z"
-    Gate(Z, qarg_address(i))
+    Gate(IntrinsicOperation.Z, qarg_address(i))
     @case "x"
-    Gate(X, qarg_address(i))
+    Gate(IntrinsicOperation.X, qarg_address(i))
     @case "h"
-    Gate(H, qarg_address(i))
+    Gate(IntrinsicOperation.H, qarg_address(i))
     @case "s"
-    Gate(S, qarg_address(i))
+    Gate(IntrinsicOperation.S, qarg_address(i))
     @case "sdag"
-    Gate(S, qarg_address(i))
+    Gate(IntrinsicOperation.S, qarg_address(i))
     @case "t"
-    Gate(S, qarg_address(i))
+    Gate(IntrinsicOperation.R, qarg_address(i))
     @case "tdag"
-    Gate(S, qarg_address(i))
+    Gate(IntrinsicOperation.t, qarg_address(i))
     @case "rx"
     error("Gate $i not yet implemented")
     @case "rx"
     error("Gate $i not yet implemented")
     @case "shift"
     error("Gate $i not yet implemented")
+
     @case _
     error("Gate $i not supported")
   end
