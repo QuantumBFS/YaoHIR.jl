@@ -61,3 +61,5 @@ end
     circuit2 = Chain(Gate(H, Locations((1, ))), Gate(H, Locations((1, ))))
     @test circuit1 == circuit2
 end
+
+include("qasm.jl")
