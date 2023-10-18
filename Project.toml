@@ -10,7 +10,6 @@ YaoLocations = "66df03fb-d475-48f7-b449-3d9064bf085b"
 # TODO Move to weak deps, after fixing bug: 
 # ArgumentError: Package YaoHIR does not have OpenQASM in its dependencies:
 OpenQASM = "a8821629-a4c0-4df7-9e00-12969ff383a7"
-CompilerPluginTools = "6b7a57c9-7cc1-4fdf-b7f5-e857abae3638"
 
 [weakdeps]
 
