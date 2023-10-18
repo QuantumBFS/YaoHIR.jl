@@ -15,6 +15,5 @@ using Core.Compiler: IRCode
 include("types.jl")
 include("intrinsic.jl")
 include("printing.jl")
-include("../ext/BlockIROpenQASMExt.jl")
 
 end

@@ -114,6 +114,10 @@ struct BlockIR
     circuit::Chain
 end
 
+function BlockIR(_::Any)
+ error("it is required to load OpenQASM for conversion .qasm. Run 'using OpenQASM'")
+end
+
 @as_record Chain
 @as_record Gate
 @as_record Ctrl
