@@ -1,11 +1,11 @@
 module YaoHIR
 
 export GenericRoutine, Routine,
-    IntrinsicRoutine,
-    Operation,
-    AdjointOperation,
-    Chain, Gate, Ctrl,
-    BlockIR
+  IntrinsicRoutine,
+  Operation,
+  AdjointOperation,
+  Chain, Gate, Ctrl,
+  BlockIR
 
 using MLStyle
 using Expronicon
