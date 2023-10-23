@@ -1,18 +1,12 @@
 name = "YaoHIR"
 uuid = "6769671a-fce8-4286-b3f7-6099e1b1298a"
 authors = ["Roger-Luo <rogerluo.rl18@gmail.com> and contributors"]
-version = "0.2.1"
+version = "0.2.2"
 
 [deps]
 Expronicon = "6b7a57c9-7cc1-4fdf-b7f5-e857abae3636"
 MLStyle = "d8e11817-5142-5d16-987a-aa16d5891078"
 YaoLocations = "66df03fb-d475-48f7-b449-3d9064bf085b"
-
-[weakdeps]
-OpenQASM = "a8821629-a4c0-4df7-9e00-12969ff383a7"
-
-[extensions]
-YaoHIRExt = ["OpenQASM"]
 
 [compat]
 Expronicon = "0.10"
@@ -21,8 +15,8 @@ YaoLocations = "0.1"
 julia = "1.9"
 
 [extras]
-Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 OpenQASM = "a8821629-a4c0-4df7-9e00-12969ff383a7"
+Test = "8dfed614-e22c-5e08-85e1-65c5234f0b40"
 
 [targets]
 test = ["Test", "OpenQASM"]
